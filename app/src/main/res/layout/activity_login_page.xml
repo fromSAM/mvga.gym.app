@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login_Page">
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_LGT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_LGB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.29" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_unT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.44" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_unB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.47" />
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_psT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.52" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_psB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.56" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_LGS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.32" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_LGE"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_unS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.09" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/Logintext"
+        android:layout_width="138dp"
+        android:layout_height="70dp"
+        android:text="Login"
+
+
+        android:textSize="55sp"
+        android:textStyle="italic"
+
+
+
+        app:layout_constraintTop_toTopOf="@id/guideline_LGT"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_LGB"
+        app:layout_constraintStart_toStartOf="@id/guideline_LGS"
+        app:layout_constraintEnd_toEndOf="@id/guideline_LGE"
+
+
+
+        />
+
+    <TextView
+        android:id="@+id/usertext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Username"
+
+        android:textSize="20sp"
+
+
+        app:layout_constraintTop_toTopOf="@id/guideline_unT"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_unB"
+        app:layout_constraintStart_toStartOf="@id/guideline_unS"
+        app:layout_constraintEnd_toEndOf="@id/guideline_LGS"
+
+
+
+        />
+
+    <TextView
+        android:id="@+id/passwordtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+
+        android:textSize="20sp"
+
+
+
+        app:layout_constraintTop_toTopOf="@id/guideline_psT"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_psB"
+        app:layout_constraintStart_toStartOf="@id/guideline_unS"
+        app:layout_constraintEnd_toEndOf="@id/guideline_LGS"
+
+
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
