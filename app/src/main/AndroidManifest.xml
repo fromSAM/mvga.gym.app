@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mvga">
         <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
             android:name=".Register_Page"
             android:exported="false" />
         <activity
