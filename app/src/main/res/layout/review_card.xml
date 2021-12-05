@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    app:cardBackgroundColor="@color/azure"
+    app:cardElevation="3dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/guestImage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="5dp"
+            android:src="@drawable/ic_baseline_account_circle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/guestName_tv"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/guestImage"
+            android:background="@color/white"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:text="name"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@+id/guestName_tv"
+            android:background="@color/white"
+            android:padding="3dp"
+            android:text="00-00-0000"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/review_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/guestName_tv"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/guestImage"
+            android:maxLines="2"
+            android:padding="3dp"
+            android:text="review text"
+            android:textAlignment="center"
+            android:textColor="@color/teal_700"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rating_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/guestImage"
+            android:layout_centerHorizontal="true"
+            android:isIndicator="true"
+            android:numStars="5" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
