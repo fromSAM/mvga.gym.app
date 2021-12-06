@@ -38,11 +38,13 @@ public class UserViewModel extends AndroidViewModel {
          appDatabase.userDao().updateBalance(id,b);
     }
 
+
     public Single<Long> getUserid(String email,String pass) {
         return appDatabase.userDao().getUserid(email,pass);
     }
-
-
+    public Single<Long> getUserid(String email) {
+        return appDatabase.userDao().getUserid(email);
+    }
 
     public void deleteUser(long id) {
         appDatabase.userDao().deleteUser(id);

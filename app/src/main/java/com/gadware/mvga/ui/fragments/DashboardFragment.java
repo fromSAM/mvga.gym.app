@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.gadware.mvga.adapters.BookingAdapter;
 import com.gadware.mvga.databinding.FragmentDashboardBinding;
 import com.gadware.mvga.models.SubscriptionInfo;
+import com.gadware.mvga.models.SubscriptionInfoModel;
 import com.gadware.mvga.models.UserInfo;
 import com.gadware.mvga.ui.activities.AddNewReview;
 import com.gadware.mvga.ui.activities.MainActivity;
@@ -95,17 +96,17 @@ public class DashboardFragment extends Fragment {
 
     private void GetSubsInfo() {
         subscriptionViewModel.getUserInfo(MainActivity.userId).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<SubscriptionInfo>() {
+                .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<SubscriptionInfoModel>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onSuccess(@NonNull SubscriptionInfo model) {
+            public void onSuccess(@NonNull SubscriptionInfoModel model) {
                 subtype = model.getSubName();
                 binding.subsTv.setText("Subscription: "+subtype);
-
+                binding.validTv.setText("Membership till: "+model.getValidity());
                 GetMyServices();
             }
 
@@ -127,9 +128,8 @@ public class DashboardFragment extends Fragment {
             @Override
             public void onSuccess(@NonNull UserInfo model) {
                 balance = model.getBalance();
-                balance = model.getBalance();
                 binding.blncTv.setText("My Balance: "+balance+" $");
-                binding.validTv.setText("Membership till: "+model.getValidity());
+                binding.refIdTv.setText("My Ref. Id: "+model.getEmail());
                 GetSubsInfo();
             }
 
@@ -161,8 +161,6 @@ public class DashboardFragment extends Fragment {
 
         alert11 = builder1.create();
         alert11.show();
-        //review dialog after deletion
-
 
     }
 

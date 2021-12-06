@@ -25,7 +25,6 @@ import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 
@@ -147,7 +146,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
     private void AddSubscription(long userId) {
-        Completable.fromAction(() -> subscriptionViewModel.insertUser(new SubscriptionInfo(userId, "none","0","0"))).observeOn(AndroidSchedulers.mainThread())
+        Completable.fromAction(() -> subscriptionViewModel.insertUser(new SubscriptionInfo(1, userId, "none", "none", "none"))).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
@@ -156,6 +155,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onComplete() {
+
+
+                long adminId = sharedPref.getLong("admin", -1);
+                if (adminId == -1) {
+                    editor.putLong("admin", userId);
+                    editor.apply();
+                }
+
                 Toast.makeText(RegisterActivity.this, "Successful...", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                 finish();

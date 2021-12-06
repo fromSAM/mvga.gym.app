@@ -15,8 +15,8 @@ import io.reactivex.Single;
 
 @Dao
 public interface UserDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertUser(TrainerInfo model);
+
+
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     Single<Long> insertSingleUser(UserInfo model);
@@ -33,8 +33,8 @@ public interface UserDao {
     @Query("Select userId from UserInfo where email=:email and pass=:pass")
     Single<Long> getUserid(String email,String pass);
 
-
-
+    @Query("Select userId from UserInfo where email=:refId")
+    Single<Long> getUserid(String refId);
 
     @Query("Delete  from UserInfo where userId=:id")
     void deleteUser(long id);

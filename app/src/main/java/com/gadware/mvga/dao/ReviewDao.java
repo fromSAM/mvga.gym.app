@@ -20,7 +20,7 @@ public interface ReviewDao {
 
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    Single<Long> insertSingleUser(ReviewInfo model);
+    void insertSingleUser(ReviewInfo model);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUserList(List<ReviewInfo> modelList);

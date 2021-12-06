@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MVGA">
         <activity
+            android:name=".ui.activities.PackageList"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.AddBooking"
             android:exported="false" />
         <activity

@@ -16,6 +16,7 @@ import com.gadware.mvga.adapters.ReviewAdapter;
 import com.gadware.mvga.adapters.ServiceAdapter;
 import com.gadware.mvga.databinding.ActivityTrainerProfileBinding;
 import com.gadware.mvga.models.SubscriptionInfo;
+import com.gadware.mvga.models.SubscriptionInfoModel;
 import com.gadware.mvga.models.TrainerInfo;
 import com.gadware.mvga.vm.ReviewViewModel;
 import com.gadware.mvga.vm.ServiceViewModel;
@@ -113,14 +114,14 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
     }
     private void GetSubsInfo() {
         subscriptionViewModel.getUserInfo(userId).observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<SubscriptionInfo>() {
+                .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<SubscriptionInfoModel>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
             }
 
             @Override
-            public void onSuccess(@NonNull SubscriptionInfo model) {
+            public void onSuccess(@NonNull SubscriptionInfoModel model) {
                 subtype=model.getSubName();
             }
 

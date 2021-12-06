@@ -6,6 +6,10 @@
         android:icon="@drawable/trainer"
         android:title="Payment" />
     <item
+        android:id="@+id/menu_pkg_list"
+        android:icon="@drawable/trainer"
+        android:title="Package List" />
+    <item
         android:id="@+id/menu_signout"
         android:icon="@drawable/trainer"
         android:title="Signout" />

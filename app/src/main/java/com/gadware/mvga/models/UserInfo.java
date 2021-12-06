@@ -18,11 +18,11 @@ import lombok.Data;
 public class UserInfo {
     @PrimaryKey(autoGenerate = true)
     private long userId;
-    private String userName, email, pass, age, height, weight, address, balance, validity;
+    private String userName, email, pass, age, height, weight, address, balance, referCount;
     private byte[] image;
 
     @Ignore
-    public UserInfo(String userName, String email, String pass, String age, String height, String weight, String address, String balance, String validity, byte[] image) {
+    public UserInfo(String userName, String email, String pass, String age, String height, String weight, String address, String balance, String referCount, byte[] image) {
         this.userName = userName;
         this.email = email;
         this.pass = pass;
@@ -31,7 +31,7 @@ public class UserInfo {
         this.weight = weight;
         this.address = address;
         this.balance = balance;
-        this.validity = validity;
+        this.referCount = referCount;
         this.image = image;
     }
 

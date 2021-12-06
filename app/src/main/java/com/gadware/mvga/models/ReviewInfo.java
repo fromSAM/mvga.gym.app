@@ -29,6 +29,14 @@ public class ReviewInfo {
     private double rating;
     private String date,review;
 
+    public ReviewInfo(long userId, long trainerId, double rating, String date, String review) {
+        this.userId = userId;
+        this.trainerId = trainerId;
+        this.rating = rating;
+        this.date = date;
+        this.review = review;
+    }
+
     public static List<ReviewInfo> getList() {
         List<ReviewInfo> reviewInfoList = new ArrayList<>();
         reviewInfoList.add(new ReviewInfo(1, 1, 1, 3, "10-10-20", "Good"));

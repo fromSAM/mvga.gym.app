@@ -36,7 +36,7 @@ public class ReviewAdapter extends RecyclerView.Adapter<ReviewAdapter.ViewHolder
         ReviewInfoModel model = modelList.get(position);
 
         holder.binding.dateTv.setText(model.getDate());
-        holder.binding.guestNameTv.setText(model.getName());
+        holder.binding.guestNameTv.setText(model.getUserName());
         holder.binding.reviewTv.setText(model.getReview());
 
         holder.binding.ratingBar.setRating((float) model.getRating());

@@ -47,8 +47,8 @@ public class TrainersAdapter extends RecyclerView.Adapter<TrainersAdapter.VH> {
         final TrainerInfo model = modelList.get(position);
 
 
-        holder.binding.nameTv.setText(model.getName());
-        holder.binding.emailTv.setText(model.getEmail());
+        holder.binding.nameTv.setText("Name: "+model.getTrainerName());
+        holder.binding.emailTv.setText(model.getTrainerEmail());
         holder.binding.expTv.setText(model.getExperience()+" years");
 
         try{
@@ -61,9 +61,6 @@ public class TrainersAdapter extends RecyclerView.Adapter<TrainersAdapter.VH> {
             intent.putExtra("id", model.getTrainerId());
             context.startActivity(intent);
         });
-
-
-
 
     }
 
@@ -79,14 +76,11 @@ public class TrainersAdapter extends RecyclerView.Adapter<TrainersAdapter.VH> {
 
 
 
-
     public static class VH extends RecyclerView.ViewHolder{
         TrainerCardBinding binding;
         public VH(@NonNull TrainerCardBinding binding) {
             super(binding.getRoot());
             this.binding=binding;
         }
-
-
     }
 }

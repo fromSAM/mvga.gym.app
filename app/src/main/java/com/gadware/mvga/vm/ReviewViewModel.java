@@ -24,14 +24,13 @@ public class ReviewViewModel extends AndroidViewModel {
         appDatabase = AppDatabase.getDatabase(application);
     }
 
-    public Single<Long> insertSingleUser(ReviewInfo model) {
-       return appDatabase.reviewDao().insertSingleUser(model);
+    public void insertSingleUser(ReviewInfo model) {
+        appDatabase.reviewDao().insertSingleUser(model);
     }
 
     public void insertUserList(List<ReviewInfo> modelList) {
          appDatabase.reviewDao().insertUserList(modelList);
     }
-
 
 
     public Flowable<List<ReviewInfoModel>> getReviewInfoModelList(long id){
