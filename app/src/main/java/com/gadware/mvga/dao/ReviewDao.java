@@ -25,7 +25,7 @@ public interface ReviewDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUserList(List<ReviewInfo> modelList);
 
-    @Query("Select reviewId,userId,trainerId,rating,date,review,UserInfo.userName from ReviewInfo join UserInfo on UserInfo.userId=ReviewInfo.userId where trainerId=:id")
+    @Query("Select ReviewInfo.reviewId,ReviewInfo.userId,ReviewInfo.trainerId,ReviewInfo.rating,ReviewInfo.date,ReviewInfo.review,UserInfo.userName from ReviewInfo join UserInfo on UserInfo.userId=ReviewInfo.userId where trainerId=:id")
     Flowable<List<ReviewInfoModel>> getReviewInfoModelList(long id);
 
 

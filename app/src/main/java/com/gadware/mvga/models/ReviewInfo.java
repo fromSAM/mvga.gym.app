@@ -3,6 +3,7 @@ package com.gadware.mvga.models;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ReviewInfo {
     private double rating;
     private String date,review;
 
+    @Ignore
     public ReviewInfo(long userId, long trainerId, double rating, String date, String review) {
         this.userId = userId;
         this.trainerId = trainerId;

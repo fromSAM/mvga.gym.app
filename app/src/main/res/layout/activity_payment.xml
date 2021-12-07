@@ -54,7 +54,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:orientation="horizontal">
 
                         <com.google.android.material.textfield.TextInputLayout
@@ -62,14 +62,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
-                            android:layout_weight="1"
+                            android:layout_weight=".5"
                             app:boxStrokeColor="@color/teal_200">
 
                             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/tv_charge"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Charge"
+                                android:hint="Charge($)"
                                 android:inputType="none"
                                 android:padding="10dp"
                                 android:text=""
@@ -81,15 +81,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="5dp"
-                            android:layout_weight="1"
-                            android:visibility="gone"
+                            android:layout_weight=".5"
                             app:boxStrokeColor="@color/teal_200">
 
                             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                                 android:id="@+id/tv_discount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Discount"
+                                android:hint="Discount($)"
                                 android:inputType="none"
                                 android:padding="10dp"
                                 android:text=""
@@ -113,6 +112,7 @@
                             android:layout_height="match_parent"
                             android:layout_marginEnd="5dp"
                             android:layout_weight="1"
+                            android:visibility="gone"
                             android:background="@drawable/btn_back_fill"
                             android:text="Claim Reference"
                             android:textAllCaps="false"
@@ -132,7 +132,7 @@
                                 android:id="@+id/tv_ref_discount"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:hint="Amount"
+                                android:hint="Amount($)"
                                 android:inputType="number"
                                 android:padding="10dp"
                                 android:text=""
@@ -189,7 +189,7 @@
                                     android:id="@+id/tv_bill"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Bill"
+                                    android:hint="Bill($)"
                                     android:inputType="none"
                                     android:padding="10dp"
                                     android:text=""
@@ -208,7 +208,7 @@
                                     android:id="@+id/tv_pay_amount"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Amount"
+                                    android:hint="Amount($)"
                                     android:inputType="number"
                                     android:padding="10dp"
                                     android:text=""

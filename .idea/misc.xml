@@ -12,7 +12,8 @@
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_package_list.xml" value="0.18888888888888888" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_payment.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_register.xml" value="0.1921875" />
-        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_trainer_profile.xml" value="0.1921875" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_splash.xml" value="0.18" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_trainer_profile.xml" value="0.2" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/admin_task_card.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/booking_card.xml" value="0.25" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/dialog_package_edit.xml" value="0.1921875" />
@@ -24,6 +25,7 @@
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/pkg_list_card.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/review_card.xml" value="0.22" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/service_card.xml" value="0.33" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/subs_list_card.xml" value="0.33" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/trainer_card.xml" value="0.25" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/menu/main_menu.xml" value="0.1921875" />

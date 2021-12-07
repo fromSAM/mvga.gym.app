@@ -38,9 +38,9 @@ public class UserInfo {
 
     public static List<UserInfo> getList() {
         List<UserInfo> userInfoList = new ArrayList<>();
-        userInfoList.add(new UserInfo(1, "Mr. Xyz", "user1@mail.com", "12345", "22", "5.11F", "65", "A road, B city", "0", String.valueOf(new Date(System.currentTimeMillis())), null));
-        userInfoList.add(new UserInfo(2, "Mr. ABC", "user2@mail.com", "12345", "25", "6.1F", "69", "B road, C city", "0", String.valueOf(new Date(System.currentTimeMillis())), null));
-        userInfoList.add(new UserInfo(3, "Mr. PQR", "user3@mail.com", "12345", "19", "5.6F", "58", "B road, B city", "0", String.valueOf(new Date(System.currentTimeMillis())), null));
+        userInfoList.add(new UserInfo(1, "Mr. Xyz", "user1@mail.com", "12345", "22", "5.11F", "65", "A road, B city", "0", "0", null));
+        userInfoList.add(new UserInfo(2, "Mr. ABC", "user2@mail.com", "12345", "25", "6.1F", "69", "B road, C city", "0", "0", null));
+        userInfoList.add(new UserInfo(3, "Mr. PQR", "user3@mail.com", "12345", "19", "5.6F", "58", "B road, B city", "0", "0", null));
         return userInfoList;
     }
 }

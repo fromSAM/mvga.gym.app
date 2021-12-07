@@ -91,7 +91,11 @@ public class AddBooking extends AppCompatActivity {
 
         binding.doneBtn.setOnClickListener(v -> {
             if (Validate() == 1) {
-                AddNewBooking();
+                try {
+                    AddNewBooking();
+                }catch (Exception e){
+                    Toast.makeText(AddBooking.this, "Error.!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -108,7 +112,7 @@ public class AddBooking extends AppCompatActivity {
         }
 
         duration = binding.etDuration.getText().toString();
-        return 0;
+        return 1;
     }
 
     private void AddNewBooking() {
@@ -127,7 +131,7 @@ public class AddBooking extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                Toast.makeText(AddBooking.this, "Error.!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

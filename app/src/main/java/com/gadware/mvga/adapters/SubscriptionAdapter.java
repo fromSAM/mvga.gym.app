@@ -46,8 +46,8 @@ public class SubscriptionAdapter extends ArrayAdapter<PackageInfo> {
 
             if (name != null) {
                 name.setText(model.getSubName());
-                price.setText(model.getCharge());
-                disc.setText(model.getDiscount());
+                price.setText("Charge: "+model.getCharge());
+                disc.setText("Discount: "+model.getDiscount());
             }
         }
         return convertView;

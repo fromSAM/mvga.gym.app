@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.gadware.mvga.adapters.ReviewAdapter;
 import com.gadware.mvga.adapters.ServiceAdapter;
 import com.gadware.mvga.databinding.ActivityTrainerProfileBinding;
-import com.gadware.mvga.models.SubscriptionInfo;
 import com.gadware.mvga.models.SubscriptionInfoModel;
 import com.gadware.mvga.models.TrainerInfo;
 import com.gadware.mvga.vm.ReviewViewModel;
@@ -134,17 +133,19 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
 
     @Override
     public void BookService(long serviceId, String serv, String desc) {
-        //verify user eligibility and suggest subs change
 
-        if (subtype.equals("Pay Per View")){
+        if (subtype.equals("Pay Per View")) {
             Toast.makeText(this, "Available for Monthly and Yearly Subscribers", Toast.LENGTH_SHORT).show();
-        }else {
+        } else if (subtype.equals("none")) {
+            Toast.makeText(this, "Add a subscription first", Toast.LENGTH_SHORT).show();
+        } else {
             Intent intent = new Intent(this, AddBooking.class);
             intent.putExtra("t_id", trainerId);
             intent.putExtra("s_id", serviceId);
             intent.putExtra("trainer", trainerName);
             intent.putExtra("serv", serv);
             intent.putExtra("desc", desc);
+            startActivity(intent);
         }
     }
 }

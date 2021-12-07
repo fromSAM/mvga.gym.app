@@ -37,6 +37,9 @@ public class UserViewModel extends AndroidViewModel {
     public void updateBalance(long id,long b) {
          appDatabase.userDao().updateBalance(id,b);
     }
+    public void updateCounter(long id) {
+         appDatabase.userDao().updateCounter(id);
+    }
 
 
     public Single<Long> getUserid(String email,String pass) {
@@ -45,7 +48,9 @@ public class UserViewModel extends AndroidViewModel {
     public Single<Long> getUserid(String email) {
         return appDatabase.userDao().getUserid(email);
     }
-
+    public Single<String> getBalance(long id) {
+        return appDatabase.userDao().getBalance(id);
+    }
     public void deleteUser(long id) {
         appDatabase.userDao().deleteUser(id);
     }

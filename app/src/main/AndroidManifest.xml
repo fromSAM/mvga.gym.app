@@ -10,33 +10,47 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MVGA">
         <activity
-            android:name=".ui.activities.PackageList"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.AddBooking"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.Payment"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.Authentication"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.TrainerProfile"
-            android:exported="false" />
-        <activity
-            android:name=".ui.activities.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:name=".ui.activities.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activities.PackageList"
+            android:exported="false"
+            android:label="Packages"/>
+        <activity
+            android:name=".ui.activities.AddBooking"
+            android:exported="false"
+            android:label="Add Service"/>
+        <activity
+            android:name=".ui.activities.Payment"
+            android:exported="false"
+            android:label="Subscription"/>
+        <activity
+            android:name=".ui.activities.Authentication"
+            android:exported="false"
+            android:label="Login"/>
+        <activity
+            android:name=".ui.activities.RegisterActivity"
+            android:exported="false"
+            android:label="Register"/>
+        <activity
+            android:name=".ui.activities.TrainerProfile"
+            android:exported="false"
+            android:label="Trainer"/>
+        <activity
+            android:name=".ui.activities.MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"/>
+        <activity
+            android:name=".ui.activities.AddNewReview"
+            android:exported="false"
+            android:label="Add Review"/>
+
     </application>
 
 </manifest>

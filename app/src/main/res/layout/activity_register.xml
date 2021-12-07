@@ -26,6 +26,7 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:orientation="vertical">
 
 
@@ -166,7 +167,7 @@
 
 
                 <CheckBox
-                    android:id="@+id/chk_api"
+                    android:id="@+id/chk_terms"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
@@ -174,44 +175,46 @@
                     android:text="I accept Terms &amp; Conditions" />
 
 
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/sendBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginStart="25dp"
-                    android:layout_marginEnd="25dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/btn_back_fill"
-                    android:text="Register"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="13sp" />
-                <androidx.appcompat.widget.LinearLayoutCompat
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginStart="30dp"
-                    android:orientation="horizontal">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Already Have an Account?" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/have_acc"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
-                        android:text="Sign In?"
-                        android:textColor="@color/purple_500" />
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </ScrollView>
     </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/sendBtn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="40dp"
+        android:background="@drawable/btn_back_fill"
+        android:text="Register"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_centerHorizontal="true"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already Have an Account?" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/have_acc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Sign In?"
+            android:textColor="@color/purple_500" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/loading_bar2"

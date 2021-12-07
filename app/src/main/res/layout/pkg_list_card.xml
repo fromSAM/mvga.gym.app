@@ -21,63 +21,20 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/btn_stroke"
             android:gravity="center"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
-                android:textAlignment="center"
-                android:padding="3dp"
-                android:maxLines="1"
-                android:background="@drawable/btn_stroke"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                tools:text="Type:" />
+
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
                 android:padding="3dp"
-                android:layout_marginStart="10dp"
-                android:maxLines="1"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/teal_700"
-                tools:text="Task abc" />
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="120dp"
-                android:layout_height="match_parent"
                 android:textAlignment="center"
-                android:padding="3dp"
                 android:maxLines="1"
-                android:background="@drawable/btn_stroke"
-                android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                tools:text="Charge:" />
-
-            <TextView
-                android:id="@+id/tv_charge"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
-                android:padding="3dp"
-                android:maxLines="1"
-                android:layout_marginStart="10dp"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
                 android:textColor="@color/purple_500"
                 tools:text="Task abc" />
@@ -86,32 +43,45 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/btn_stroke"
             android:gravity="center"
             android:orientation="horizontal">
 
+
+
             <TextView
-                android:layout_width="120dp"
+                android:id="@+id/tv_charge"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textAlignment="center"
                 android:padding="3dp"
                 android:maxLines="1"
-                android:textAlignment="center"
-                android:background="@drawable/btn_stroke"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                tools:text="Discount: " />
+                android:textColor="@color/purple_500"
+                tools:text="Task abc" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@drawable/btn_stroke"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
 
             <TextView
                 android:id="@+id/tv_discount"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_vertical"
+                android:textAlignment="center"
                 android:padding="3dp"
                 android:maxLines="1"
-                android:layout_marginStart="10dp"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/teal_200"
+                android:textColor="@color/purple_500"
                 tools:text="Task abc" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -123,7 +93,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="5dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_back_fill"
             android:text="Edit"

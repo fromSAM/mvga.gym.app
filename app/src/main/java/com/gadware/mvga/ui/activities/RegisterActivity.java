@@ -119,12 +119,17 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
             binding.etAddress.setError(null);
         }
+
+        if (!binding.chkTerms.isChecked()){
+            Toast.makeText(this, "Accept Terms and Conditions", Toast.LENGTH_SHORT).show();
+            return 0;
+        }
         return 1;
     }
 
 
     private void CreateAccount() {
-        userViewModel.insertSingleUser(new UserInfo(name, email, pass, age, height, weight, address, "0", String.valueOf(new Date(System.currentTimeMillis())), null)).observeOn(AndroidSchedulers.mainThread())
+        userViewModel.insertSingleUser(new UserInfo(name, email, pass, age, height, weight, address, "0", "0", null)).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<Long>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {

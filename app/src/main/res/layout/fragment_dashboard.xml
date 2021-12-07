@@ -70,6 +70,17 @@
                 android:textColor="@color/teal_700"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ref_count_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_card"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="5dp"
+                android:text="Ref. Count:"
+                android:textColor="@color/teal_700"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
@@ -83,16 +94,25 @@
         app:cardBackgroundColor="@color/azure"
         app:cardCornerRadius="15dp"
         app:cardElevation="3dp">
-
+        <TextView
+            android:id="@+id/no_serv_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_card"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="No Booked Service"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="match_parent"
             android:layout_below="@+id/info_lay"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
+            android:visibility="gone"
+            android:layout_margin="10dp"
             tools:listitem="@layout/booking_card" />
     </androidx.cardview.widget.CardView>
 </androidx.appcompat.widget.LinearLayoutCompat>

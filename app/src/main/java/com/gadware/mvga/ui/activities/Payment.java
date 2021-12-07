@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,15 +24,13 @@ import com.gadware.mvga.adapters.SubscriptionAdapter;
 import com.gadware.mvga.databinding.ActivityPaymentBinding;
 import com.gadware.mvga.databinding.DialogReferenceBinding;
 import com.gadware.mvga.models.PackageInfo;
-import com.gadware.mvga.models.SubscriptionInfo;
 import com.gadware.mvga.vm.SubscriptionViewModel;
 import com.gadware.mvga.vm.UserViewModel;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -41,9 +40,11 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class Payment extends AppCompatActivity {
+    private static final String TAG = "BtnChk";
     ActivityPaymentBinding binding;
     ArrayAdapter<String> adapter;
 
+    Disposable dx;
     private AlertDialog alertDialog;
     public Calendar myCalendar = Calendar.getInstance();
     public Calendar now = Calendar.getInstance();
@@ -54,9 +55,9 @@ public class Payment extends AppCompatActivity {
     private long ReferId = -1;
     SubscriptionAdapter adapter2;
 
-    List<PackageInfo> modelList = new ArrayList<>();
+    //List<PackageInfo> modelList = new ArrayList<>();
 
-    long userId;
+    long userId, myBalance;
     long am, remB, ch, refDiscount;
 
     boolean discountFlag = false, RefDiscount = false;
@@ -81,21 +82,19 @@ public class Payment extends AppCompatActivity {
         userId = sharedPref.getLong("userId", -1);
 
 
-        adapter2 = new SubscriptionAdapter(this, modelList);
-        binding.tvSubType.setAdapter(adapter2);
-        binding.tvSubType.setText(binding.tvSubType.getAdapter().getItem(0).toString());
-        adapter2.getFilter().filter(null);
+        GetPkgList();
+
         binding.tvSubType.setOnItemClickListener((adapterView, view, pos, id) -> {
             subInfo[0] = (PackageInfo) adapterView.getItemAtPosition(pos);
+
+            binding.tvCharge.setText(subInfo[0].getCharge());
+            binding.tvDiscount.setText(subInfo[0].getDiscount());
             if (subInfo[0].getPkgId() != 4) {
                 binding.refBtn.setVisibility(View.GONE);
-                binding.tvDiscount.setVisibility(View.GONE);
                 discountFlag = false;
             } else {
                 binding.refBtn.setVisibility(View.VISIBLE);
                 discountFlag = true;
-                binding.tvDiscount.setVisibility(View.VISIBLE);
-                binding.tvDiscount.setText(subInfo[0].getDiscount());
             }
         });
 
@@ -122,7 +121,7 @@ public class Payment extends AppCompatActivity {
             if (Validate2() == 1) {
                 binding.billLay.setVisibility(View.GONE);
                 binding.paymentLay.setVisibility(View.VISIBLE);
-
+                Objects.requireNonNull(getSupportActionBar()).setTitle("Payment");
                 if (discountFlag) {
                     long d = Long.parseLong(subInfo[0].getDiscount());
                     if (RefDiscount) {
@@ -137,10 +136,28 @@ public class Payment extends AppCompatActivity {
 
         binding.doneBtn.setOnClickListener(v -> {
             if (Validate() == 1) {
+                Log.d(TAG, "btn: " + "clicked");
                 UpdateSubType();
             }
         });
 
+    }
+
+    private void GetPkgList() {
+        dx = subscriptionViewModel.getPkgList().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(modelList -> {
+                    adapter2 = new SubscriptionAdapter(this, modelList);
+                    binding.tvSubType.setAdapter(adapter2);
+                    binding.tvSubType.setText(binding.tvSubType.getAdapter().getItem(0).toString());
+                    subInfo[0] = (PackageInfo) binding.tvSubType.getAdapter().getItem(0);
+
+                    binding.tvCharge.setText(subInfo[0].getCharge());
+                    binding.tvDiscount.setText(subInfo[0].getDiscount());
+
+                    adapter2.getFilter().filter(null);
+
+                    GetBalance();
+                });
     }
 
     private void UpdateSubType() {
@@ -152,6 +169,7 @@ public class Payment extends AppCompatActivity {
 
             @Override
             public void onComplete() {
+                Log.d(TAG, "sub type updated");
                 UpdateBalance();
             }
 
@@ -188,8 +206,8 @@ public class Payment extends AppCompatActivity {
         });
     }
 
-    private void ReturnBalance(long id, long b) {
-        Completable.fromAction(() -> userViewModel.updateBalance(id, b)).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+    private void UpdateCounter() {
+        Completable.fromAction(() -> userViewModel.updateCounter(userId)).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {
 
@@ -204,6 +222,25 @@ public class Payment extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
+                Toast.makeText(Payment.this, "Error.!\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void ReturnBalance(long id, long b) {
+        Completable.fromAction(() -> userViewModel.updateBalance(id, b)).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribe(new CompletableObserver() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onComplete() {
+                UpdateCounter();
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
 
             }
         });
@@ -212,10 +249,28 @@ public class Payment extends AppCompatActivity {
     private int Validate() {
         String type;
 
+        type = binding.tvPayAmount.getText().toString();
+        if (type.isEmpty()) {
+            binding.tvPayAmount.setError("invalid");
+            Log.d(TAG, "amount err");
+            return 0;
+        } else {
+            try {
+                am = Long.parseLong(type);
+                remB = am - ch;
+                am += myBalance;
+            } catch (Exception e) {
+                Log.d(TAG, "conversion failed");
+                Toast.makeText(this, "Error...\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                binding.tvPayAmount.setError("invalid");
+                return 0;
+            }
+        }
 
         type = binding.tvCardNumber.getText().toString();
         if (type.isEmpty()) {
             binding.tvCardNumber.setError("invalid");
+            Log.d(TAG, "card err");
             return 0;
         } else {
             binding.tvCardNumber.setError(null);
@@ -223,34 +278,26 @@ public class Payment extends AppCompatActivity {
         type = binding.tvName.getText().toString();
         if (type.isEmpty()) {
             binding.tvName.setError("invalid");
+            Log.d(TAG, "name err");
             return 0;
         } else {
             binding.tvName.setError(null);
         }
-        type = binding.tvPayAmount.getText().toString();
-        if (type.isEmpty()) {
-            binding.tvPayAmount.setError("invalid");
-            return 0;
-        } else {
-            try {
-                am = Long.parseLong(type);
-            } catch (Exception e) {
-                Toast.makeText(this, "error...\n" + e.getMessage(), Toast.LENGTH_SHORT).show();
-                binding.tvPayAmount.setError(null);
-            }
-        }
 
+
+        binding.tvPayAmount.setError(null);
 
         type = binding.tvBill.getText().toString();
         ch = Long.parseLong(type);
 
-        remB = am - ch;
+        long r = am - ch;
 
-        if (remB >= 0) {
-            binding.tvPayAmount.setError(null);
+        Log.d(TAG, remB + "--" + ch + "--" + am);
+        if (r < 0) {
+            binding.tvPayAmount.setError("less than charge");
             return 0;
         } else {
-            binding.tvPayAmount.setError("less than charge");
+            binding.tvPayAmount.setError(null);
         }
 
         type = binding.etCvv.getText().toString();
@@ -275,14 +322,14 @@ public class Payment extends AppCompatActivity {
     private int Validate2() {
         String type;
 
-
-        type = binding.tvCardNumber.getText().toString();
-        if (type.isEmpty()) {
-            binding.tvCardNumber.setError("invalid");
-            return 0;
-        } else {
-            binding.tvCardNumber.setError(null);
-        }
+//
+//        type = binding.tvCardNumber.getText().toString();
+//        if (type.isEmpty()) {
+//            binding.tvCardNumber.setError("invalid");
+//            return 0;
+//        } else {
+//            binding.tvCardNumber.setError(null);
+//        }
 
 
         return 1;
@@ -345,6 +392,27 @@ public class Payment extends AppCompatActivity {
                     public void onSuccess(@NonNull Long aLong) {
                         ReferId = aLong;
                         GetSubType();
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+
+                    }
+                });
+    }
+
+    private void GetBalance() {
+
+        userViewModel.getBalance(userId).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).
+                subscribe(new SingleObserver<String>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(@NonNull String aLong) {
+                        myBalance = Long.parseLong(aLong);
                     }
 
                     @Override

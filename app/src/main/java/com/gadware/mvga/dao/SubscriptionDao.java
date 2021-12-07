@@ -22,7 +22,7 @@ public interface SubscriptionDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUser(SubscriptionInfo model);
 
-    @Query("Select subId,pkgId,userId,subName,bill,referDiscount,validity from SubscriptionInfo join PackageInfo on PackageInfo.pkgId=SubscriptionInfo.pkgid where userId=:id")
+    @Query("Select SubscriptionInfo.subId,SubscriptionInfo.pkgId,SubscriptionInfo.userId,PackageInfo.subName,SubscriptionInfo.bill,SubscriptionInfo.referDiscount,SubscriptionInfo.validity from SubscriptionInfo join PackageInfo on PackageInfo.pkgId=SubscriptionInfo.pkgid where userId=:id")
     Single<SubscriptionInfoModel> getUserInfo(long id);
 
     @Query("Select * from PackageInfo where pkgId!=1")

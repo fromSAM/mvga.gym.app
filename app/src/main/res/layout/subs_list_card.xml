@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_gravity="center"
-    android:layout_margin="3dp"
-    android:background="@color/white"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="3dp"
+    app:cardBackgroundColor="@color/azure"
+    app:cardElevation="2dp"
     android:padding="4dp">
 
 
-
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_margin="5dp"
         android:orientation="vertical"
         android:weightSum="2">
 
@@ -21,43 +24,48 @@
             android:id="@+id/tv_sub_name"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center_vertical"
+            android:gravity="center"
             android:layout_weight="1"
             android:maxLines="1"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/black"
+            android:textColor="@color/teal_700"
+            android:textStyle="bold"
             tools:text="Mr. Xyz" />
-    <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:weightSum="2">
-        <TextView
-            android:id="@+id/tv_charge"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:maxLines="1"
-            android:layout_marginEnd="10dp"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/black"
-            tools:text="Task abc" />
-        <TextView
-            android:id="@+id/tv_discount"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:maxLines="1"
-            android:textAppearance="?android:attr/textAppearanceListItemSmall"
-            android:textColor="@color/black"
-            tools:text="Task abc" />
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <TextView
+                android:id="@+id/tv_charge"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Task abc" />
+
+            <TextView
+                android:id="@+id/tv_discount"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:maxLines="1"
+                android:textSize="11sp"
+                android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                android:textColor="@color/black"
+                tools:text="Task abc" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-</LinearLayout>
+</androidx.cardview.widget.CardView>

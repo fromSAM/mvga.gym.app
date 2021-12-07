@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -82,6 +83,7 @@ public class PackageList extends AppCompatActivity implements PackageAdapter.Edi
             binding.tvDiscount.setInputType(InputType.TYPE_NULL);
         }
 
+        binding.closeBtn.setOnClickListener(v -> alertDialog.dismiss());
 
         binding.doneBtn.setOnClickListener(v -> {
             String ch = binding.tvCharge.getText().toString();

@@ -30,11 +30,17 @@ public interface UserDao {
     @Query("Update UserInfo set balance=balance+:balance where userId=:id")
     void updateBalance(long id,long balance);
 
+    @Query("Update UserInfo set referCount=referCount+1 where userId=:id")
+    void updateCounter(long id);
+
     @Query("Select userId from UserInfo where email=:email and pass=:pass")
     Single<Long> getUserid(String email,String pass);
 
     @Query("Select userId from UserInfo where email=:refId")
     Single<Long> getUserid(String refId);
+
+    @Query("Select balance from UserInfo where userId=:userId")
+    Single<String> getBalance(long userId);
 
     @Query("Delete  from UserInfo where userId=:id")
     void deleteUser(long id);

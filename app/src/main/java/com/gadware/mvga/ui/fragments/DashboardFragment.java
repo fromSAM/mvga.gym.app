@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.gadware.mvga.adapters.BookingAdapter;
 import com.gadware.mvga.databinding.FragmentDashboardBinding;
-import com.gadware.mvga.models.SubscriptionInfo;
 import com.gadware.mvga.models.SubscriptionInfoModel;
 import com.gadware.mvga.models.UserInfo;
 import com.gadware.mvga.ui.activities.AddNewReview;
@@ -34,6 +34,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class DashboardFragment extends Fragment {
 
+    private static final String TAG = "DBTest";
     private FragmentDashboardBinding binding;
     BookingViewModel bookingViewModel;
     UserViewModel userViewModel;
@@ -55,7 +56,7 @@ public class DashboardFragment extends Fragment {
 
         //if no subscription, dialog show
 
-        GetUserInfo();
+
 
         return binding.getRoot();
     }
@@ -64,9 +65,16 @@ public class DashboardFragment extends Fragment {
     private void GetMyServices() {
         dx = bookingViewModel.getModelList(MainActivity.userId).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(reviewInfoModels -> {
-                    adapter = new BookingAdapter(requireContext(), reviewInfoModels, this::RemoveBookingDialog);
-                    binding.recycler.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    if (reviewInfoModels.size() > 0) {
+                        adapter = new BookingAdapter(requireContext(), reviewInfoModels, (bookingId, trainerId) -> RemoveBookingDialog( bookingId,  trainerId));
+                        binding.recycler.setVisibility(View.VISIBLE);
+                        binding.noServTv.setVisibility(View.GONE);
+                        binding.recycler.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    } else {
+                        binding.noServTv.setVisibility(View.VISIBLE);
+                        binding.recycler.setVisibility(View.GONE);
+                    }
                 });
     }
 
@@ -80,17 +88,14 @@ public class DashboardFragment extends Fragment {
                 "Yes",
                 (dialog, id) -> {
                     RemoveBooking(bookingId, trainerId);
-                    dialog.cancel();
                 });
 
         builder1.setNegativeButton(
                 "No",
-                (dialog, id) -> dialog.cancel());
+                (dialog, id) -> alert11.dismiss());
 
         alert11 = builder1.create();
         alert11.show();
-        //review dialog after deletion
-
 
     }
 
@@ -127,9 +132,11 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onSuccess(@NonNull UserInfo model) {
+
                 balance = model.getBalance();
                 binding.blncTv.setText("My Balance: "+balance+" $");
                 binding.refIdTv.setText("My Ref. Id: "+model.getEmail());
+                binding.refCountTv.setText("Ref. Counter: "+model.getReferCount());
                 GetSubsInfo();
             }
 
@@ -149,15 +156,16 @@ public class DashboardFragment extends Fragment {
         builder1.setPositiveButton(
                 "Yes",
                 (dialog, id) -> {
+                    alert11.dismiss();
                     Intent intent = new Intent(requireContext(), AddNewReview.class);
                     intent.putExtra("t_id", trainerId);
-                    startActivity(intent);
-                    dialog.cancel();
+                    requireContext().startActivity(intent);
+
                 });
 
         builder1.setNegativeButton(
                 "No",
-                (dialog, id) -> dialog.cancel());
+                (dialog, id) -> alert11.cancel());
 
         alert11 = builder1.create();
         alert11.show();
@@ -173,15 +181,23 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onComplete() {
+                alert11.dismiss();
                 Toast.makeText(requireContext(), "Booking Successful", Toast.LENGTH_SHORT).show();
                 ShowReviewDialog(trainerId);
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                alert11.dismiss();
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d(TAG, "user id: "+MainActivity.userId);
+        GetUserInfo();
     }
 
     @Override

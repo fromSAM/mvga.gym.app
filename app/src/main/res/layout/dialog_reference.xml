@@ -23,8 +23,8 @@
                 android:id="@+id/tv_ref_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Referel Code"
-                android:inputType="number"
+                android:hint="Referel Id"
+                android:inputType="textEmailAddress"
                 android:padding="10dp"
                 android:text=""
                 android:textColor="@color/black" />

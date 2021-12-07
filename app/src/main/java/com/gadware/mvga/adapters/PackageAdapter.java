@@ -39,9 +39,9 @@ public class PackageAdapter extends RecyclerView.Adapter<PackageAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PackageInfo model = modelList.get(position);
 
-        holder.binding.tvName.setText(model.getSubName());
-        holder.binding.tvCharge.setText(model.getCharge());
-        holder.binding.tvDiscount.setText(model.getDiscount());
+        holder.binding.tvName.setText("Subscription Type: "+model.getSubName());
+        holder.binding.tvCharge.setText("Charge($): "+model.getCharge());
+        holder.binding.tvDiscount.setText("Discount($): "+model.getDiscount());
 
 
         if (!admin){

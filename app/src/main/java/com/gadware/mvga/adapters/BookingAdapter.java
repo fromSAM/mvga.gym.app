@@ -72,6 +72,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         }
     }
     public interface BookInterface{
-        void RemoveBooking(long serviceId,long trainerId);
+        void RemoveBooking(long bookingId,long trainerId);
     }
 }

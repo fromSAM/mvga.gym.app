@@ -20,10 +20,10 @@ public interface BookingDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertUser(BookingInfo model);
 
-    @Query("Select bookingId,trainerId,userId,serviceId,sTime,duration," +
+    @Query("Select BookingInfo.bookingId,BookingInfo.trainerId,BookingInfo.userId,BookingInfo.serviceId,BookingInfo.sTime,BookingInfo.duration," +
             "TrainerInfo.trainerName,Serviceinfo.servName,Serviceinfo.description " +
-            "from BookingInfo join TrainerInfo on BookingInfo.userId=BookingInfo.trainerId " +
-            "join Serviceinfo on BookingInfo.serviceId=Serviceinfo.serviceId  where userId=:id")
+            "from BookingInfo join TrainerInfo on TrainerInfo.trainerId=BookingInfo.trainerId " +
+            "join Serviceinfo on Serviceinfo.serviceId=BookingInfo.serviceId  where userId=:id")
     Flowable<List<BookingInfoModel>> getModelList(long id);
 
     @Query("Delete  from BookingInfo where bookingId=:id")
