@@ -84,6 +84,8 @@ public class AddNewReview extends AppCompatActivity {
         review = binding.inputReview.getText().toString();
         if (review.isEmpty()) {
             binding.nameLayout.setError("invalid");
+            Toast.makeText(AddNewReview.this, "Review Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.nameLayout.setError(null);
@@ -91,7 +93,7 @@ public class AddNewReview extends AppCompatActivity {
 
         rat = binding.ratingBar.getRating();
         if (rat == 0) {
-            Toast.makeText(this, "Rating empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Rating Empty", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             rating = String.valueOf(rat);

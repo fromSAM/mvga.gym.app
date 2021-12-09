@@ -12,15 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.gadware.mvga.databinding.ActivityAuthenticationBinding;
-import com.gadware.mvga.models.UserInfo;
 import com.gadware.mvga.vm.UserViewModel;
 
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 
 public class Authentication extends AppCompatActivity {
@@ -47,6 +43,8 @@ public class Authentication extends AppCompatActivity {
             String email = binding.tvEmail.getText().toString();
             if (email.isEmpty()|| !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                 binding.tvEmail.setError("invalid");
+                Toast.makeText(Authentication.this, "Email Empty", Toast.LENGTH_SHORT).show();
+
                 return;
             } else {
                 binding.tvEmail.setError(null);
@@ -55,8 +53,13 @@ public class Authentication extends AppCompatActivity {
             String pass = binding.tvPass.getText().toString();
             if (pass.isEmpty()) {
                 binding.tvPass.setError("invalid");
+                Toast.makeText(Authentication.this, "Password Empty", Toast.LENGTH_SHORT).show();
                 return;
             } else {
+                if (pass.length() < 6) {
+                    Toast.makeText(Authentication.this, "Password min length 6", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 binding.tvPass.setError(null);
             }
             LoginUser(email, pass);
@@ -82,7 +85,7 @@ public class Authentication extends AppCompatActivity {
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-
+                        Toast.makeText(Authentication.this, "Error.!\n" + "Email and or password invalid", Toast.LENGTH_SHORT).show();
                     }
                 });
     }

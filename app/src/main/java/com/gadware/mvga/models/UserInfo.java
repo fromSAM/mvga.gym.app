@@ -1,10 +1,11 @@
 package com.gadware.mvga.models;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,11 +15,14 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@Entity
+@Entity(indices = {@Index(value = {"email"}, unique = true)})
 public class UserInfo {
     @PrimaryKey(autoGenerate = true)
     private long userId;
-    private String userName, email, pass, age, height, weight, address, balance, referCount;
+    private String userName;
+//    @ColumnInfo(index = true)
+    private String email;
+    private String pass, age, height, weight, address, balance, referCount;
     private byte[] image;
 
     @Ignore

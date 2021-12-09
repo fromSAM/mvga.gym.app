@@ -25,7 +25,7 @@ import com.gadware.mvga.models.UserInfo;
 import com.gadware.mvga.utils.Converters;
 
 @TypeConverters({Converters.class})
-@Database(entities = {TrainerInfo.class, ReviewInfo.class, UserInfo.class, ServiceInfo.class, PackageInfo.class, SubscriptionInfo.class, BookingInfo.class}, version = 2, exportSchema = false)
+@Database(entities = {TrainerInfo.class, ReviewInfo.class, UserInfo.class, ServiceInfo.class, PackageInfo.class, SubscriptionInfo.class, BookingInfo.class}, version = 6, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "GADWARE_MVGA_DEMO";

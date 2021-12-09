@@ -79,13 +79,13 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
                 trainerName = model.getTrainerName();
                 binding.nameTv.setText(model.getTrainerName());
                 binding.emailTv.setText(model.getTrainerEmail());
-                binding.expTv.setText(model.getExperience() + " years");
+                binding.expTv.setText("Experience: "+model.getExperience() + " years");
                 GetReviews();
             }
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                Toast.makeText(TrainerProfile.this, "Error.!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -95,7 +95,7 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
         dx = serviceViewModel.getUserInfo(trainerId).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(reviewInfoModels -> {
                     adapter2 = new ServiceAdapter(this, reviewInfoModels, this);
-                    binding.recycler2.setAdapter(adapter2);
+                    binding.recycler.setAdapter(adapter2);
                     adapter2.notifyDataSetChanged();
                     GetSubsInfo();
                 });
@@ -106,7 +106,7 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
         dx = reviewViewModel.getReviewInfoModelList(trainerId).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(reviewInfoModels -> {
                     adapter = new ReviewAdapter(this, reviewInfoModels);
-                    binding.recycler.setAdapter(adapter);
+                    binding.recycler2.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                     GetServiceList();
                 });
@@ -126,7 +126,7 @@ public class TrainerProfile extends AppCompatActivity implements ServiceAdapter.
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                Toast.makeText(TrainerProfile.this, "Error.!\n"+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

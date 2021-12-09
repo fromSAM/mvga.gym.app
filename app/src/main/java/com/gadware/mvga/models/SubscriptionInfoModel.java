@@ -12,5 +12,4 @@ public class SubscriptionInfoModel {
     private long pkgId;
     private long userId;
     private String subName,bill,referDiscount,validity;
-
 }

@@ -137,7 +137,10 @@ public class SplashActivity extends AppCompatActivity {
 
                     @Override
                     public void onComplete() {
-                        InsertReviewList();
+                        editor.putBoolean("firstLaunch", false).apply();
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        finish();
+                       //InsertReviewList();
                     }
 
                     @Override

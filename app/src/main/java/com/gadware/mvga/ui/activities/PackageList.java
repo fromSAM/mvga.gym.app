@@ -89,6 +89,7 @@ public class PackageList extends AppCompatActivity implements PackageAdapter.Edi
             String ch = binding.tvCharge.getText().toString();
             if (ch.isEmpty()) {
                 binding.tvCharge.setError("empty");
+                Toast.makeText(this, "Charge Empty", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 binding.tvCharge.setError(null);
@@ -96,6 +97,7 @@ public class PackageList extends AppCompatActivity implements PackageAdapter.Edi
             String ds = binding.tvDiscount.getText().toString();
             if (ds.isEmpty()) {
                 binding.tvDiscount.setError("empty");
+                Toast.makeText(this, "Discount Empty", Toast.LENGTH_SHORT).show();
                 return;
             } else {
                 binding.tvDiscount.setError(null);
@@ -119,7 +121,7 @@ public class PackageList extends AppCompatActivity implements PackageAdapter.Edi
 
             @Override
             public void onComplete() {
-                Toast.makeText(PackageList.this, "Payment Successful", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PackageList.this, "Update Successful", Toast.LENGTH_SHORT).show();
                 alertDialog.dismiss();
             }
 

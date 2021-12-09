@@ -82,6 +82,24 @@
                         android:textColor="@color/black" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    app:boxStrokeColor="@color/teal_200">
+
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Date"
+                        android:inputType="none"
+                        android:padding="10dp"
+                        android:text=""
+                        android:textColor="@color/black" />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,7 +137,7 @@
                             android:id="@+id/et_duration"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="Duration"
+                            android:hint="Duration(Hours)"
                             android:inputType="none"
                             android:padding="10dp"
                             android:text=""

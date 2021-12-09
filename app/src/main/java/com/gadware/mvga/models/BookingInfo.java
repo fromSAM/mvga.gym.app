@@ -27,14 +27,15 @@ public class BookingInfo {
     @ColumnInfo(index = true)
     private long serviceId;
 
-    private String sTime, duration;
-
+    private String  duration;
+    private long sTime;
     @Ignore
-    public BookingInfo(long trainerId, long userId, long serviceId, String sTime, String duration) {
+
+    public BookingInfo(long trainerId, long userId, long serviceId,  String duration, long sTime) {
         this.trainerId = trainerId;
         this.userId = userId;
         this.serviceId = serviceId;
-        this.sTime = sTime;
         this.duration = duration;
+        this.sTime = sTime;
     }
 }

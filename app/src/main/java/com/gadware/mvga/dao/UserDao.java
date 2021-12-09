@@ -18,10 +18,10 @@ public interface UserDao {
 
 
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert()
     Single<Long> insertSingleUser(UserInfo model);
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert()
     void insertUserList(List<UserInfo> modelList);
 
     @Query("Select * from UserInfo where userId=:id")
@@ -36,8 +36,13 @@ public interface UserDao {
     @Query("Select userId from UserInfo where email=:email and pass=:pass")
     Single<Long> getUserid(String email,String pass);
 
+    @Query("Select distinct email from UserInfo")
+    Single<List<String>> getEmails();
+
     @Query("Select userId from UserInfo where email=:refId")
     Single<Long> getUserid(String refId);
+    @Query("Select pass from UserInfo where email=:refId")
+    Single<String> getUserPass(String refId);
 
     @Query("Select balance from UserInfo where userId=:userId")
     Single<String> getBalance(long userId);

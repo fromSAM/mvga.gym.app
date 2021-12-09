@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gadware.mvga.databinding.BookingCardBinding;
 import com.gadware.mvga.models.BookingInfoModel;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 
@@ -38,7 +40,8 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.ViewHold
         holder.binding.descTv.setText(model.getDescription());
         holder.binding.trainerTv.setText("Trainer: "+model.getTrainerName());
         holder.binding.servTv.setText("Service: "+model.getServName());
-        holder.binding.startTimeTv.setText(model.getSTime());
+        holder.binding.startTimeTv.setText("S. Time"+new SimpleDateFormat("hh:mm a").format(model.getSTime()));
+        holder.binding.startTimeTv.setText(String.valueOf(new Date(model.getSTime())));
         holder.binding.endTimeTv.setText("Duration: "+model.getDuration());
 
 

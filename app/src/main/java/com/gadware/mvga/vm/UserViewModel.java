@@ -25,6 +25,9 @@ public class UserViewModel extends AndroidViewModel {
     public Single<Long> insertSingleUser(UserInfo model) {
         return appDatabase.userDao().insertSingleUser(model);
     }
+    public Single<List<String>> getEmails() {
+        return appDatabase.userDao().getEmails();
+    }
 
     public void insertUserList(List<UserInfo> modelList) {
         appDatabase.userDao().insertUserList(modelList);
@@ -47,6 +50,9 @@ public class UserViewModel extends AndroidViewModel {
     }
     public Single<Long> getUserid(String email) {
         return appDatabase.userDao().getUserid(email);
+    }
+    public Single<String> getUserPass(String email) {
+        return appDatabase.userDao().getUserPass(email);
     }
     public Single<String> getBalance(long id) {
         return appDatabase.userDao().getBalance(id);

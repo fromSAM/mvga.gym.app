@@ -18,7 +18,7 @@ import com.gadware.mvga.models.UserInfo;
 import com.gadware.mvga.vm.SubscriptionViewModel;
 import com.gadware.mvga.vm.UserViewModel;
 
-import java.sql.Date;
+import java.util.Objects;
 
 import io.reactivex.Completable;
 import io.reactivex.CompletableObserver;
@@ -70,6 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
         name = binding.etName.getText().toString();
         if (name.isEmpty()) {
             binding.etName.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Name Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etName.setError(null);
@@ -78,13 +80,17 @@ public class RegisterActivity extends AppCompatActivity {
         email = binding.etEmail.getText().toString();
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.etEmail.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etEmail.setError(null);
         }
         pass = binding.etPassword.getText().toString();
-        if (pass.isEmpty()) {
+        if (pass.isEmpty() || pass.length() < 6) {
             binding.etPassword.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Pass Invalid", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etPassword.setError(null);
@@ -92,6 +98,8 @@ public class RegisterActivity extends AppCompatActivity {
         age = binding.etAge.getText().toString();
         if (age.isEmpty()) {
             binding.etAge.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Age Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etAge.setError(null);
@@ -99,6 +107,8 @@ public class RegisterActivity extends AppCompatActivity {
         height = binding.etHeight.getText().toString();
         if (height.isEmpty()) {
             binding.etHeight.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Height Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etHeight.setError(null);
@@ -107,6 +117,8 @@ public class RegisterActivity extends AppCompatActivity {
         weight = binding.etWeight.getText().toString();
         if (weight.isEmpty()) {
             binding.etWeight.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Weight Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etWeight.setError(null);
@@ -115,6 +127,8 @@ public class RegisterActivity extends AppCompatActivity {
         address = binding.etAddress.getText().toString();
         if (address.isEmpty()) {
             binding.etAddress.setError("Invalid");
+            Toast.makeText(RegisterActivity.this, "Address Empty", Toast.LENGTH_SHORT).show();
+
             return 0;
         } else {
             binding.etAddress.setError(null);
@@ -145,7 +159,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-
+                binding.loadingBar2.setVisibility(View.INVISIBLE);
+                if (Objects.requireNonNull(e.getMessage()).contains("UNIQUE constraint failed")) {
+                    Toast.makeText(RegisterActivity.this, "Error.!\n" + "Email already used", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

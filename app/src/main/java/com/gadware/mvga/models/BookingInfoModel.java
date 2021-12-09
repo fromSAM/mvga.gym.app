@@ -20,6 +20,7 @@ public class BookingInfoModel {
     private long userId;
     @ColumnInfo(index = true)
     private long serviceId;
-
-    private String sTime, duration,trainerName,servName,description;
+    private String duration;
+    private long sTime;
+    private String trainerName,servName,description;
 }

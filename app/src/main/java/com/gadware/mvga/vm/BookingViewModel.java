@@ -4,12 +4,9 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.room.Query;
 
 import com.gadware.mvga.models.BookingInfo;
 import com.gadware.mvga.models.BookingInfoModel;
-import com.gadware.mvga.models.ReviewInfo;
-import com.gadware.mvga.models.ReviewInfoModel;
 import com.gadware.mvga.storage.AppDatabase;
 
 import java.util.List;
@@ -30,8 +27,14 @@ public class BookingViewModel extends AndroidViewModel {
         appDatabase.bookingDao().insertUser(model);
     }
 
+    public Single<List<BookingInfoModel>> getTrainerBookingListList(long id){
+        return appDatabase.bookingDao().getTrainerBookingListList(id);
+    }
+    public Single<List<BookingInfoModel>> getMyBookingListList(long id){
+        return appDatabase.bookingDao().getMyBookingList(id);
+    }
     public Flowable<List<BookingInfoModel>> getModelList(long id){
-        return appDatabase.bookingDao().getModelList(id);
+        return appDatabase.bookingDao().getMyBookingModelList(id);
     }
     public void deleteUser(long id){
          appDatabase.bookingDao().deleteUser(id);

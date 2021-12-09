@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.gadware.mvga.databinding.ActivityPaymentBinding;
 import com.gadware.mvga.databinding.DialogReferenceBinding;
+import com.gadware.mvga.models.BookingInfoModel;
 import com.gadware.mvga.models.PackageInfo;
 import com.gadware.mvga.utils.MonthType;
 import com.gadware.mvga.utils.RackMonthPicker;
@@ -34,8 +35,11 @@ import com.gadware.mvga.vm.SubscriptionViewModel;
 import com.gadware.mvga.vm.UserViewModel;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -52,20 +56,20 @@ public class Payment extends AppCompatActivity {
     ActivityPaymentBinding binding;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapter2;
+    java.util.Date date= new Date();
+    Calendar cal = Calendar.getInstance();
 
+    List<String> EmailList=new ArrayList<>();
     Disposable dx;
     private AlertDialog alertDialog;
-    public Calendar myCalendar = Calendar.getInstance();
-    public Calendar now = Calendar.getInstance();
-    public int yr = now.get(Calendar.YEAR);
-    public int mnth = now.get(Calendar.MONTH);
-    public int day = now.get(Calendar.DAY_OF_MONTH);
+
+
+
 
     private long ReferId = -1;
 
 
-    Map<String, String> chargeMap = new HashMap<>();
-    Map<String, String> discMap = new HashMap<>();
+
     Map<String, PackageInfo> pkgMap = new HashMap<>();
 
     long userId, myBalance;
@@ -94,7 +98,7 @@ public class Payment extends AppCompatActivity {
 
 
         binding.etCvv.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
-        binding.tvCardNumber.setFilters(new InputFilter[]{new InputFilter.LengthFilter(19)});
+        binding.tvCardNumber.setFilters(new InputFilter[]{new InputFilter.LengthFilter(16)});
 
 
         GetPkgList();
@@ -144,9 +148,6 @@ public class Payment extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (s.length()==4||s.length()==9||s.length()==14){
-                    //binding.tvCardNumber.setText(s.toString()+"-");
-                }
 
             }
 
@@ -312,6 +313,7 @@ public class Payment extends AppCompatActivity {
         type = binding.tvPayAmount.getText().toString();
         if (type.isEmpty()) {
             binding.tvPayAmount.setError("invalid");
+            Toast.makeText(this, "Amount Empty", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             try {
@@ -339,6 +341,7 @@ public class Payment extends AppCompatActivity {
         Log.d(TAG, remB + "--" + ch + "--" + am);
         if (r < 0) {
             binding.tvPayAmount.setError("less than charge");
+            Toast.makeText(this, "Paying less than charge", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             binding.tvPayAmount.setError(null);
@@ -348,6 +351,7 @@ public class Payment extends AppCompatActivity {
         if (paypayFlag) {
             type = binding.tvPaypal.getText().toString();
             if (type.isEmpty()|| !Patterns.EMAIL_ADDRESS.matcher(type).matches()) {
+                Toast.makeText(this, "Invalid Paypal Email", Toast.LENGTH_SHORT).show();
                 binding.tvPaypal.setError("invalid");
                 return 0;
             } else {
@@ -359,9 +363,9 @@ public class Payment extends AppCompatActivity {
 
 
         type = binding.tvCardNumber.getText().toString();
-        if (type.isEmpty()) {
+        if (type.isEmpty()||type.length()<16) {
             binding.tvCardNumber.setError("invalid");
-            Log.d(TAG, "card err");
+            Toast.makeText(this, "Card number invalid", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             binding.tvCardNumber.setError(null);
@@ -369,14 +373,15 @@ public class Payment extends AppCompatActivity {
         type = binding.tvName.getText().toString();
         if (type.isEmpty()) {
             binding.tvName.setError("invalid");
-            Log.d(TAG, "name err");
+            Toast.makeText(this, "Holder Name empty", Toast.LENGTH_SHORT).show();
             return 0;
         } else {
             binding.tvName.setError(null);
         }
 
         type = binding.etCvv.getText().toString();
-        if (type.isEmpty()) {
+        if (type.isEmpty()||type.length()<3) {
+            Toast.makeText(this, "CVV number invalid", Toast.LENGTH_SHORT).show();
             binding.etCvv.setError("invalid");
             return 0;
         } else {
@@ -384,9 +389,32 @@ public class Payment extends AppCompatActivity {
         }
         type = binding.etDate.getText().toString();
         if (type.isEmpty()) {
+            Toast.makeText(this, "Expiry invalid", Toast.LENGTH_SHORT).show();
             binding.etDate.setError("invalid");
             return 0;
         } else {
+            cal.setTime(date);
+            int month = cal.get(Calendar.MONTH)+1;
+            int year = cal.get(Calendar.YEAR);
+
+            String []v=type.split("/",0);
+            Log.d(TAG, date.toString());
+            Log.d(TAG, month+" m/y "+year+"--"+v[0]+" m/y "+v[1]);
+            if (Integer.parseInt(v[1])<year){
+                Toast.makeText(this, "Card Expired", Toast.LENGTH_SHORT).show();
+                return 0;
+            }else if (Integer.parseInt(v[1])==year&&Integer.parseInt(v[0])<month){
+                Toast.makeText(this, "Card Expired", Toast.LENGTH_SHORT).show();
+                return 0;
+            }
+
+//            SimpleDateFormat month_date = new SimpleDateFormat("MM/yyyy", Locale.US);
+//            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd",Locale.US);
+//
+//
+//
+//            String month_name = month_date.format(sdf.format(new Date()));
+//            System.out.println("Month :" + month_name);
             binding.etDate.setError(null);
         }
 
@@ -438,10 +466,16 @@ public class Payment extends AppCompatActivity {
 
         binding.doneBtn.setOnClickListener(v -> {
             String refid = binding.tvRefId.getText().toString();
-            if (refid.isEmpty()) {
-                binding.tvRefId.setError("empty");
+            if (refid.isEmpty()|| !Patterns.EMAIL_ADDRESS.matcher(refid).matches()) {
+                binding.tvRefId.setError("invalid");
+                Toast.makeText(this, "Invalid Email", Toast.LENGTH_SHORT).show();
                 return;
             } else {
+                if (!EmailList.contains(refid)){
+                    Toast.makeText(this, "Invalid Reference", Toast.LENGTH_SHORT).show();
+                    binding.tvRefId.setError("invalid");
+                    return ;
+                }
                 binding.tvRefId.setError(null);
             }
             try {
@@ -493,6 +527,7 @@ public class Payment extends AppCompatActivity {
                     @Override
                     public void onSuccess(@NonNull String aLong) {
                         myBalance = Long.parseLong(aLong);
+                        GetEmails();
                     }
 
                     @Override
@@ -537,5 +572,26 @@ public class Payment extends AppCompatActivity {
 
                     }
                 });
+    }
+
+    private void GetEmails() {
+        userViewModel.getEmails().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<List<String>>() {
+            @Override
+            public void onSubscribe(@NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onSuccess(@NonNull List<String> bookingInfoModels) {
+                EmailList.addAll(bookingInfoModels);
+
+            }
+
+            @Override
+            public void onError(@NonNull Throwable e) {
+
+            }
+        });
     }
 }
