@@ -158,7 +158,6 @@ public class SplashActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         editor.putBoolean("firstLaunch", false).apply();
-                        Toast.makeText(SplashActivity.this, "You are all set", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         finish();
 

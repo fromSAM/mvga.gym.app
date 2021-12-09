@@ -21,8 +21,8 @@ public class PackageInfo {
     public static List<PackageInfo> getList() {
         List<PackageInfo> subscriptionInfos = new ArrayList<>();
         subscriptionInfos.add(new PackageInfo(1, "none", "none", "none"));
-        subscriptionInfos.add(new PackageInfo(2, "Pay Per View", "2", "none"));
-        subscriptionInfos.add(new PackageInfo(3, "Monthly", "40", "none"));
+        subscriptionInfos.add(new PackageInfo(2, "Pay Per View", "2", "0"));
+        subscriptionInfos.add(new PackageInfo(3, "Monthly", "40", "0"));
         subscriptionInfos.add(new PackageInfo(4, "Yearly", "400", "20"));
         return subscriptionInfos;
     }

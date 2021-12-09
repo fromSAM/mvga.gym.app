@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="azure">#FFF0FFFF</color>
+
+    <color name="color_primary">#009B4C</color>
+    <color name="transparent">#00000000</color>
+    <color name="card_background">#ffffff</color>
+    <color name="window_background">#00000000</color>
 </resources>

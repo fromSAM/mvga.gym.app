@@ -52,7 +52,6 @@ public class DashboardFragment extends Fragment {
         bookingViewModel = new ViewModelProvider(this).get(BookingViewModel.class);
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         subscriptionViewModel = new ViewModelProvider(this).get(SubscriptionViewModel.class);
-        binding.recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         //if no subscription, dialog show
 
@@ -66,11 +65,17 @@ public class DashboardFragment extends Fragment {
         dx = bookingViewModel.getModelList(MainActivity.userId).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(reviewInfoModels -> {
                     if (reviewInfoModels.size() > 0) {
-                        adapter = new BookingAdapter(requireContext(), reviewInfoModels, (bookingId, trainerId) -> RemoveBookingDialog( bookingId,  trainerId));
-                        binding.recycler.setVisibility(View.VISIBLE);
-                        binding.noServTv.setVisibility(View.GONE);
-                        binding.recycler.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+                        try {
+                            binding.recycler.setVisibility(View.VISIBLE);
+                            binding.noServTv.setVisibility(View.GONE);
+                            binding.recycler.setLayoutManager(new LinearLayoutManager(requireContext()));
+                            adapter = new BookingAdapter(requireContext(), reviewInfoModels, (bookingId, trainerId) -> RemoveBookingDialog( bookingId,  trainerId));
+
+                            binding.recycler.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+                        }catch (Exception e){
+                            Log.d(TAG, "GetMyServices: "+e.getMessage());
+                        }
                     } else {
                         binding.noServTv.setVisibility(View.VISIBLE);
                         binding.recycler.setVisibility(View.GONE);
@@ -197,12 +202,14 @@ public class DashboardFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "user id: "+MainActivity.userId);
+
         GetUserInfo();
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        binding = null;
+        //dx.dispose();
+        //binding = null;
     }
 }

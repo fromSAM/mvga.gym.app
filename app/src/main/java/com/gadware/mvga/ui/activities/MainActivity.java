@@ -7,11 +7,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,19 +17,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.gadware.mvga.R;
 import com.gadware.mvga.databinding.ActivityMainBinding;
-import com.gadware.mvga.models.PackageInfo;
-import com.gadware.mvga.vm.ReviewViewModel;
-import com.gadware.mvga.vm.ServiceViewModel;
-import com.gadware.mvga.vm.SubscriptionViewModel;
-import com.gadware.mvga.vm.TrainerViewModel;
-import com.gadware.mvga.vm.UserViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import io.reactivex.Completable;
-import io.reactivex.CompletableObserver;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -39,11 +25,8 @@ public class MainActivity extends AppCompatActivity {
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
 
-
-
-
-
     public static long userId;
+    private boolean firstLaunch = true;
 
 
     @Override
@@ -54,17 +37,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
-
         sharedPref = getSharedPreferences("MVGA", Context.MODE_PRIVATE);
         editor = sharedPref.edit();
 
-        userId = sharedPref.getLong("userId", -1);
 
-        if (userId == -1) {
-            startActivity(new Intent(this, Authentication.class));
-            finish();
-        }
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -91,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
 
         if (item.getItemId() == R.id.menu_signout) {
-            editor.clear();
+            editor.remove("userId");
             editor.apply();
             startActivity(new Intent(this, Authentication.class));
             finish();
@@ -107,5 +83,24 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userId = sharedPref.getLong("userId", -1);
+        firstLaunch = sharedPref.getBoolean("firstLaunch", true);
+
+        if (userId == -1 && firstLaunch) {
+            startActivity(new Intent(this, SplashActivity.class));
+            finish();
+        } else if (firstLaunch) {
+            startActivity(new Intent(this, SplashActivity.class));
+            finish();
+        } else if (userId == -1) {
+            startActivity(new Intent(this, Authentication.class));
+            finish();
+        }
     }
 }

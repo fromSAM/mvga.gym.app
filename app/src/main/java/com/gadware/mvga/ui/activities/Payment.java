@@ -9,7 +9,11 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,18 +22,22 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDialog;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.gadware.mvga.adapters.SubscriptionAdapter;
 import com.gadware.mvga.databinding.ActivityPaymentBinding;
 import com.gadware.mvga.databinding.DialogReferenceBinding;
 import com.gadware.mvga.models.PackageInfo;
+import com.gadware.mvga.utils.MonthType;
+import com.gadware.mvga.utils.RackMonthPicker;
 import com.gadware.mvga.vm.SubscriptionViewModel;
 import com.gadware.mvga.vm.UserViewModel;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
 import io.reactivex.Completable;
@@ -43,6 +51,7 @@ public class Payment extends AppCompatActivity {
     private static final String TAG = "BtnChk";
     ActivityPaymentBinding binding;
     ArrayAdapter<String> adapter;
+    ArrayAdapter<String> adapter2;
 
     Disposable dx;
     private AlertDialog alertDialog;
@@ -53,14 +62,16 @@ public class Payment extends AppCompatActivity {
     public int day = now.get(Calendar.DAY_OF_MONTH);
 
     private long ReferId = -1;
-    SubscriptionAdapter adapter2;
 
-    //List<PackageInfo> modelList = new ArrayList<>();
+
+    Map<String, String> chargeMap = new HashMap<>();
+    Map<String, String> discMap = new HashMap<>();
+    Map<String, PackageInfo> pkgMap = new HashMap<>();
 
     long userId, myBalance;
     long am, remB, ch, refDiscount;
 
-    boolean discountFlag = false, RefDiscount = false;
+    boolean discountFlag = false, RefDiscount = false, paypayFlag = false;
 
     SharedPreferences sharedPref;
     UserViewModel userViewModel;
@@ -82,11 +93,16 @@ public class Payment extends AppCompatActivity {
         userId = sharedPref.getLong("userId", -1);
 
 
+        binding.etCvv.setFilters(new InputFilter[]{new InputFilter.LengthFilter(3)});
+        binding.tvCardNumber.setFilters(new InputFilter[]{new InputFilter.LengthFilter(19)});
+
+
         GetPkgList();
 
         binding.tvSubType.setOnItemClickListener((adapterView, view, pos, id) -> {
-            subInfo[0] = (PackageInfo) adapterView.getItemAtPosition(pos);
+            subInfo[0] = pkgMap.get(adapterView.getItemAtPosition(pos));
 
+            assert subInfo[0] != null;
             binding.tvCharge.setText(subInfo[0].getCharge());
             binding.tvDiscount.setText(subInfo[0].getDiscount());
             if (subInfo[0].getPkgId() != 4) {
@@ -98,17 +114,52 @@ public class Payment extends AppCompatActivity {
             }
         });
 
+        binding.tvCardType.setOnItemClickListener((adapterView, view, pos, id) -> {
+            String ct = (String) adapterView.getItemAtPosition(pos);
 
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"Paypal", "Debit Card", "Credit Card"});
+            if (ct.equals("Paypal")) {
+                binding.cardPayLay.setVisibility(View.GONE);
+                binding.paypalLay.setVisibility(View.VISIBLE);
+                paypayFlag = true;
+            } else {
+                binding.cardPayLay.setVisibility(View.VISIBLE);
+                binding.paypalLay.setVisibility(View.GONE);
+                paypayFlag = false;
+            }
+        });
+
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{  "Credit Card","Debit Card","Paypal"});
         adapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         binding.tvCardType.setAdapter(adapter);
         binding.tvCardType.setText(binding.tvCardType.getAdapter().getItem(0).toString());
         adapter.getFilter().filter(null);
 
 
+        binding.tvCardNumber.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.length()==4||s.length()==9||s.length()==14){
+                    //binding.tvCardNumber.setText(s.toString()+"-");
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+
         binding.etDate.setOnTouchListener((v, event) -> {
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                ShowDatePicker(binding.etDate, new SimpleDateFormat("dd-MMM-yyyy", Locale.US));
+                ShowDatePicker();
             }
             return false;
         });
@@ -136,7 +187,6 @@ public class Payment extends AppCompatActivity {
 
         binding.doneBtn.setOnClickListener(v -> {
             if (Validate() == 1) {
-                Log.d(TAG, "btn: " + "clicked");
                 UpdateSubType();
             }
         });
@@ -146,11 +196,21 @@ public class Payment extends AppCompatActivity {
     private void GetPkgList() {
         dx = subscriptionViewModel.getPkgList().observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(modelList -> {
-                    adapter2 = new SubscriptionAdapter(this, modelList);
+
+                    for (PackageInfo pk : modelList) {
+                        pkgMap.put(pk.getSubName(), pk);
+                    }
+
+                    adapter2 = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new String[]{"Yearly", "Monthly", "Pay Per View"});
+                    adapter2.setDropDownViewResource(android.R.layout.simple_list_item_1);
                     binding.tvSubType.setAdapter(adapter2);
                     binding.tvSubType.setText(binding.tvSubType.getAdapter().getItem(0).toString());
-                    subInfo[0] = (PackageInfo) binding.tvSubType.getAdapter().getItem(0);
+                    adapter2.getFilter().filter(null);
 
+
+                    subInfo[0] = pkgMap.get("Yearly");
+
+                    assert subInfo[0] != null;
                     binding.tvCharge.setText(subInfo[0].getCharge());
                     binding.tvDiscount.setText(subInfo[0].getDiscount());
 
@@ -252,7 +312,6 @@ public class Payment extends AppCompatActivity {
         type = binding.tvPayAmount.getText().toString();
         if (type.isEmpty()) {
             binding.tvPayAmount.setError("invalid");
-            Log.d(TAG, "amount err");
             return 0;
         } else {
             try {
@@ -266,6 +325,38 @@ public class Payment extends AppCompatActivity {
                 return 0;
             }
         }
+
+
+
+
+        binding.tvPayAmount.setError(null);
+
+        type = binding.tvBill.getText().toString();
+        ch = Long.parseLong(type);
+
+        long r = am - ch;
+
+        Log.d(TAG, remB + "--" + ch + "--" + am);
+        if (r < 0) {
+            binding.tvPayAmount.setError("less than charge");
+            return 0;
+        } else {
+            binding.tvPayAmount.setError(null);
+        }
+
+
+        if (paypayFlag) {
+            type = binding.tvPaypal.getText().toString();
+            if (type.isEmpty()|| !Patterns.EMAIL_ADDRESS.matcher(type).matches()) {
+                binding.tvPaypal.setError("invalid");
+                return 0;
+            } else {
+                binding.tvPaypal.setError(null);
+                return 1;
+            }
+        }
+
+
 
         type = binding.tvCardNumber.getText().toString();
         if (type.isEmpty()) {
@@ -282,22 +373,6 @@ public class Payment extends AppCompatActivity {
             return 0;
         } else {
             binding.tvName.setError(null);
-        }
-
-
-        binding.tvPayAmount.setError(null);
-
-        type = binding.tvBill.getText().toString();
-        ch = Long.parseLong(type);
-
-        long r = am - ch;
-
-        Log.d(TAG, remB + "--" + ch + "--" + am);
-        if (r < 0) {
-            binding.tvPayAmount.setError("less than charge");
-            return 0;
-        } else {
-            binding.tvPayAmount.setError(null);
         }
 
         type = binding.etCvv.getText().toString();
@@ -335,17 +410,22 @@ public class Payment extends AppCompatActivity {
         return 1;
     }
 
-    private void ShowDatePicker(MaterialAutoCompleteTextView textView, SimpleDateFormat sdf) {
+    private void ShowDatePicker() {
 
-        DatePickerDialog nDate = new DatePickerDialog(this, (view, year, month, dayOfMonth) -> {
-            myCalendar.set(Calendar.YEAR, year);
-            myCalendar.set(Calendar.MONTH, month);
-            myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+        new RackMonthPicker(this)
+                .setMonthType(MonthType.TEXT)
+                .setLocale(Locale.ENGLISH)
+                .setPositiveButton((month, startDate, endDate, year, monthLabel) -> {
+                    System.out.println(month);
+                    System.out.println(startDate);
+                    System.out.println(endDate);
+                    System.out.println(year);
+                    System.out.println(monthLabel);
 
-            textView.setText(sdf.format(myCalendar.getTimeInMillis()));
+                    binding.etDate.setText(month + "/" + year);
 
-        }, yr, mnth, day);
-        nDate.show();
+                })
+                .setNegativeButton(AppCompatDialog::dismiss).show();
 
     }
 

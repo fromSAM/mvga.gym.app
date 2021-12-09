@@ -101,7 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="5dp"
+                        android:layout_margin="10dp"
                         android:layout_weight="2"
                         android:gravity="center"
                         android:orientation="horizontal">
@@ -110,9 +110,7 @@
                             android:id="@+id/refBtn"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_marginEnd="5dp"
                             android:layout_weight="1"
-                            android:visibility="gone"
                             android:background="@drawable/btn_back_fill"
                             android:text="Claim Reference"
                             android:textAllCaps="false"
@@ -123,7 +121,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="5dp"
+                            android:layout_marginStart="10dp"
                             android:layout_weight="1"
                             android:visibility="gone"
                             app:boxStrokeColor="@color/teal_200">
@@ -237,100 +235,133 @@
                                 android:textColor="@color/black" />
                         </com.google.android.material.textfield.TextInputLayout>
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            app:boxStrokeColor="@color/teal_200">
-
-                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                android:id="@+id/tv_card_number"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Card Number"
-                                android:inputType="number"
-                                android:padding="10dp"
-                                android:text=""
-                                android:textColor="@color/black" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            app:boxStrokeColor="@color/teal_200">
-
-                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                android:id="@+id/tv_name"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:hint="Holder Name"
-                                android:inputType="textPersonName"
-                                android:padding="10dp"
-                                android:text=""
-                                android:textColor="@color/black" />
-                        </com.google.android.material.textfield.TextInputLayout>
-
-
                         <androidx.appcompat.widget.LinearLayoutCompat
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="2"
-                            android:orientation="horizontal">
-
+                            android:orientation="vertical"
+                            android:id="@+id/card_pay_lay">
                             <com.google.android.material.textfield.TextInputLayout
                                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="0dp"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="3dp"
-                                android:layout_weight="1"
-                                app:boxStrokeColor="@color/teal_200"
-                                app:passwordToggleEnabled="true">
-
-                                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                    android:id="@+id/et_cvv"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:hint="CVV"
-                                    android:inputType="numberPassword"
-                                    android:padding="10dp"
-                                    android:text=""
-                                    android:textColor="@color/black" />
-                            </com.google.android.material.textfield.TextInputLayout>
-
-                            <com.google.android.material.textfield.TextInputLayout
-                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:layout_margin="5dp"
                                 app:boxStrokeColor="@color/teal_200">
 
                                 <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                                    android:id="@+id/et_date"
+                                    android:id="@+id/tv_card_number"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:hint="Expiry Date"
-                                    android:inputType="none"
+                                    android:hint="Card Number"
+                                    android:inputType="number"
                                     android:padding="10dp"
                                     android:text=""
                                     android:textColor="@color/black" />
                             </com.google.android.material.textfield.TextInputLayout>
 
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                app:boxStrokeColor="@color/teal_200">
+
+                                <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                    android:id="@+id/tv_name"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:hint="Holder Name"
+                                    android:inputType="textPersonName"
+                                    android:padding="10dp"
+                                    android:text=""
+                                    android:textColor="@color/black" />
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="2"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="3dp"
+                                    android:layout_weight="1"
+                                    app:boxStrokeColor="@color/teal_200"
+                                    app:passwordToggleEnabled="true">
+
+                                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                        android:id="@+id/et_cvv"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="CVV"
+                                        android:inputType="numberPassword"
+                                        android:padding="10dp"
+                                        android:text=""
+                                        android:textColor="@color/black" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    app:boxStrokeColor="@color/teal_200">
+
+                                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                        android:id="@+id/et_date"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Expiry Date"
+                                        android:inputType="none"
+                                        android:padding="10dp"
+                                        android:text=""
+                                        android:textColor="@color/black" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </androidx.appcompat.widget.LinearLayoutCompat>
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <com.google.android.material.textfield.TextInputLayout
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:id="@+id/paypal_lay"
+                            android:visibility="gone"
+                            android:layout_weight="1"
+                            app:boxStrokeColor="@color/teal_200">
+
+                            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                                android:id="@+id/tv_paypal"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="Email Address"
+                                android:inputType="textEmailAddress"
+                                android:padding="10dp"
+                                android:text=""
+                                android:textColor="@color/black" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/doneBtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginStart="10dp"
                             android:layout_marginTop="10dp"
-                            android:gravity="center"
-                            android:orientation="vertical">
-
-
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:background="@drawable/btn_back_fill"
+                            android:text="Pay Now"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="13sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -340,18 +371,5 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/doneBtn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:background="@drawable/btn_back_fill"
-        android:text="Pay Now"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="13sp" />
+
 </RelativeLayout>

@@ -36,7 +36,7 @@
                 android:textAlignment="center"
                 android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/teal_700"
                 tools:text="Task abc" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -59,7 +59,7 @@
                 android:padding="3dp"
                 android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/teal_700"
                 tools:text="Task abc" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -81,7 +81,7 @@
                 android:padding="3dp"
                 android:maxLines="1"
                 android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                android:textColor="@color/purple_500"
+                android:textColor="@color/teal_700"
                 tools:text="Task abc" />
         </androidx.appcompat.widget.LinearLayoutCompat>
 

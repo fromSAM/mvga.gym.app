@@ -5,6 +5,10 @@
       <map>
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/btn_back_fill.xml" value="0.1935185185185185" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/btn_stroke.xml" value="0.20833333333333334" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/ic_baseline_keyboard_arrow_left.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/material_dialog_window.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/month_default.xml" value="0.20512820512820512" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/drawable/text_selector.xml" value="0.20512820512820512" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_add_booking.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_add_new_review.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_authentication.xml" value="0.1921875" />
@@ -16,12 +20,14 @@
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/activity_trainer_profile.xml" value="0.2" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/admin_task_card.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/booking_card.xml" value="0.25" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/dialog_month_picker.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/dialog_package_edit.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/dialog_reference.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/dialog_subscription.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/fragment_dashboard.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/fragment_home.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/fragment_profile.xml" value="0.1921875" />
+        <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/item_view_month.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/pkg_list_card.xml" value="0.1921875" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/review_card.xml" value="0.22" />
         <entry key="..\:/Users/Saawry/AndroidStudioProjects/MVGA/app/src/main/res/layout/service_card.xml" value="0.33" />

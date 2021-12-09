@@ -53,6 +53,6 @@ public class TrainersFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         dx.dispose();
-        binding = null;
+        //binding = null;
     }
 }
