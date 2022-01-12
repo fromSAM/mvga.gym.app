@@ -141,9 +141,29 @@ public class RegisterActivity extends AppCompatActivity {
         return 1;
     }
 
+    public String encrypt(String input){
+        //String input=textPane.getText();
+        int i;
+        char[] in=input.toCharArray();
+        char[] out=input.toCharArray();
+        int n=13;
+
+        for(i=0;i<in.length;i++){
+            int ascii = (int) in[i]+n;
+            out[i]=(char)ascii;
+
+        }
+        String output=new String(out);
+        return output;
+
+    }
+
 
     private void CreateAccount() {
-        userViewModel.insertSingleUser(new UserInfo(name, email, pass, age, height, weight, address, "0", "0", null)).observeOn(AndroidSchedulers.mainThread())
+
+        String Epass=encrypt(pass);
+
+        userViewModel.insertSingleUser(new UserInfo(name, email, Epass, age, height, weight, address, "0", "0", null)).observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io()).subscribe(new SingleObserver<Long>() {
             @Override
             public void onSubscribe(@NonNull Disposable d) {

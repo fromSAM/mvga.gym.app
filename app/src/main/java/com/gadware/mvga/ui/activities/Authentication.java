@@ -24,6 +24,26 @@ public class Authentication extends AppCompatActivity {
     UserViewModel userViewModel;
     SharedPreferences sharedPref;
     SharedPreferences.Editor editor;
+
+
+    public String encrypt(String input){
+        //String input=textPane.getText();
+        int i;
+        char[] in=input.toCharArray();
+        char[] out=input.toCharArray();
+        int n=13;
+
+        for(i=0;i<in.length;i++){
+            int ascii = (int) in[i]+n;
+            out[i]=(char)ascii;
+
+        }
+        String output=new String(out);
+        return output;
+
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +82,9 @@ public class Authentication extends AppCompatActivity {
                 }
                 binding.tvPass.setError(null);
             }
-            LoginUser(email, pass);
+
+            String Dpass=encrypt(pass);
+            LoginUser(email, Dpass);
         });
     }
 

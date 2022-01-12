@@ -594,4 +594,10 @@ public class Payment extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
 }
